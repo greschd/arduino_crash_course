@@ -6,7 +6,7 @@ ALLLIBS = $(ARDLIBS) $(CUSTOM_LIB_REQ)
 BAUD ?= 460800
 #---------------------------path----------------------------------------
 PORT ?= /dev/ttyACM*
-ARDUINO_DIR = /home/msk/ArduinoMin
+ARDUINO_DIR = /home/greschd/programming/Arduino/arduino_crash_course
 ARDUINO_LIBS = $(ARDUINO_DIR)/libraries
 ARDUINO_CORE = $(ARDUINO_LIBS)/Core
 AVR_TOOLS_PATH = /usr/bin

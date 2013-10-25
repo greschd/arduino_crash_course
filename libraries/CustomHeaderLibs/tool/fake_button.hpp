@@ -2,6 +2,12 @@
 // Date:    09.08.2013 19:23:18 CEST
 // File:    fake_button.hpp
 
+/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://www.wtfpl.net/ or COPYING for more details. */
+
 #ifndef __FAKE_BUTTON_HEADER
 #define __FAKE_BUTTON_HEADER
 

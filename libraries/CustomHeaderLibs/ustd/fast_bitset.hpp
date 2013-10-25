@@ -2,8 +2,16 @@
 // Date:    15.06.2013 21:35:16 EDT
 // File:    fast_bitset.hpp
 
+/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://www.wtfpl.net/ or COPYING for more details. */
+
 #ifndef __FAST_BITSET_HEADER
 #define __FAST_BITSET_HEADER
+
+//CAN ONLY BE USED UP TO N==64
 
 #include "ard_assert.hpp"
 #include "../util/byte_operation.hpp"

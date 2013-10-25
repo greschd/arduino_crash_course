@@ -2,34 +2,14 @@
 // Date:    25.05.2013 19:22:25 EDT
 // File:    eeprom_report.hpp
 
+/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://www.wtfpl.net/ or COPYING for more details. */
+
 #ifndef __EEPROM_REPORT_HEADER
 #define __EEPROM_REPORT_HEADER
-
-//------------------- how to use -------------------
-/* Construct via default ctor: 
- *      EEPROM_mirror_class mirror(); //there is already an instance mirror
- * 
- * eeprom_report() will print the EEPROM table in a nice form in readable two-byte hex format
- * eeprom_report_data()  will send the cells as bytes terminated by an newline
- * 
- * Call the check(id = 'e') 
- * in the main loop. If there is an 'e' in the start of Serialbuffer it will print all in the EEPROM
- *      mirror.check();
- *      mirror.check('r'); //reacts to an 'r' in the buffer
- * Use check_byte() exactly the same as check(), only difference is the output. check_byte() gives a string of
- * the cells as bytes and an endl at the end
- *      mirror.check_byte();
- *      mirror.check_byte('r'); //reacts to an 'r' in the buffer
- * Use reset() to wirte FF in all EEPROM cells; result(x) does the same, only that it writes x in every cell
- * only writes if not already ok!
- *      mirror.reset();
- *      mirror.reset(42);
- * fillPrint(val, depth, c = ' ', base = 10)
- * prints the val in dec-form with leading spaces, so that it uses depth characters in total
- *      fillPrint(3, 2);            //gives " 3"
- *      fillPrint(11, 3, '*');       //gives "*11"
- *      fillPrint(11, 2, ' ', 16);  //gives " B"
- */
 
 #include <ustd/iostream.hpp>
 

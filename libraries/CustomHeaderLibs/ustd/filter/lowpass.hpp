@@ -2,6 +2,12 @@
 // Date:    23.07.2013 05:09:59 EDT
 // File:    lowpass.hpp
 
+/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://www.wtfpl.net/ or COPYING for more details. */
+
 #ifndef __LOWPASS_HEADER
 #define __LOWPASS_HEADER
 
@@ -12,7 +18,7 @@
 namespace ustd {
     template<typename T, unsigned N, typename _base = identity_filter<T> >
     class lowpass_filter: public _base {
-        typedef typename mean_trait<T>::type mean_type;
+        typedef typename util::mean_trait<T>::type mean_type;
         typedef _base base;
     public:
         //------------------- ctors -------------------

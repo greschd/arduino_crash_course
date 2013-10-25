@@ -1,9 +1,17 @@
 // Author:  Mario S. Könz <mskoenz@gmx.net>
 // Date:    11.06.2013 21:14:49 EDT
-// File:    hd_io.hpp
+// File:    adv_eeprom.hpp
 
-#ifndef __HD_IO_HEADER
-#define __HD_IO_HEADER
+/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://www.wtfpl.net/ or COPYING for more details. */
+
+#ifndef __ADV_EEPROM_HEADER
+#define __ADV_EEPROM_HEADER
+
+//DO NOT INCLUDE THIS FILE AND eeprom.hpp AT THE SAME TIME
 
 #include "serializer.hpp"
 #include "../ustd/unordered_map.hpp"
@@ -54,13 +62,13 @@ namespace com {
             if(corrupted_ == corrupt) {
                 adjust_pos(t, oes_.pos());
                 oes_ & t;
-                oes_.write(checksum(t));
+                oes_.write(util::checksum(t));
                 init_vmv(t);
             }
             else {
                 adjust_pos(t, ies_.pos());
                 ies_ & t;
-                if(ies_.read() != checksum(t)) {
+                if(ies_.read() != util::checksum(t)) {
                     DEBUG_MSG("eeprom is corrupted! reset and fresh init incomming")
                     oes_.pos() = 0;
                     oes_.write(corrupt);
@@ -85,7 +93,7 @@ namespace com {
             version(0);
             
             oes_ & t;
-            oes_.write(checksum(t));
+            oes_.write(util::checksum(t));
             return (*this);
         }
         //------------------- read from eeprom -------------------
@@ -104,7 +112,7 @@ namespace com {
             version(0);
             
             ies_ & t;
-            ASSERT_MSG(ies_.read() == checksum(t), "cannot access uninitialized version");
+            ASSERT_MSG(ies_.read() == util::checksum(t), "cannot access uninitialized version");
             
             return (*this);
         }
@@ -206,4 +214,4 @@ namespace com {
     
     EEPROMV2_class<EEPROMClass, 1024> eeprom(EEPROM);
 }//end namespace com
-#endif //__HD_IO_HEADER
+#endif //__ADV_EEPROM_HEADER

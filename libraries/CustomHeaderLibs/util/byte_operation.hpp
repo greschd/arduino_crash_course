@@ -2,11 +2,16 @@
 // Date:    29.05.2013 18:53:20 EDT
 // File:    bitoperation.hpp
 
+/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://www.wtfpl.net/ or COPYING for more details. */
+
 #ifndef __BITOPERATION_HEADER
 #define __BITOPERATION_HEADER
 
 namespace util {
-
     namespace detail {
         typedef uint8_t byte_op_size_type;
     }
@@ -46,6 +51,5 @@ namespace util {
     inline void flip_bit(T & unit, uint8_t const & pos) {
         unit ^= (T(1) << pos);
     }
-    
 }//end namespace util
 #endif //__BITOPERATION_HEADER

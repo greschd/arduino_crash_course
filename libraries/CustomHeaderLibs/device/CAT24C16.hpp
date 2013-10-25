@@ -2,6 +2,12 @@
 // Date:    19.08.2013 22:23:43 CEST
 // File:    CAT24C16.hpp
 
+/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://www.wtfpl.net/ or COPYING for more details. */
+
 #ifndef __CAT24C16_HEADER
 #define __CAT24C16_HEADER
 

@@ -36,7 +36,7 @@ public:
     ~serial_class() {
         close();
     }
-    bool open(std::string const & name, uint const & baud = 460800lu) {
+    bool open(std::string const & name, uint32_t const & baud = 460800lu) {
         
         tty_fd=::open(name.c_str(), O_RDWR | O_NONBLOCK);
         if(tty_fd == -1) {
@@ -46,7 +46,7 @@ public:
         std::cout << GREEN << "port " << GREENB << name << GREEN << " is open" << NONE << std::endl;
         init();
         
-        #define lazyswitch(X) else if(baud == X) {cfsetospeed(&tio, B##X);cfsetispeed(&tio, B##X);}
+        #define lazyswitch(X) else if(baud == X) {cfsetospeed(&tio, X);cfsetispeed(&tio, X);}
         
         if(0);
         lazyswitch(460800)
@@ -106,7 +106,7 @@ public:
         return 0;
     }
     void flush() {
-        for(uint i = 0; i < 10000; ++i) { //just heuristics...
+        for(uint32_t i = 0; i < 10000; ++i) { //just heuristics...
             read();
         }
         while(available()) {
@@ -153,7 +153,7 @@ public:
 
 int main(int argc,char** argv) {
     std::string name = "/dev/ttyACM0";
-    uint baud = 460800lu;
+    uint32_t baud = 460800lu;
     if(argc > 1)
         name = argv[1];
     if(argc > 2)

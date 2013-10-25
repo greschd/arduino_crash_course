@@ -2,6 +2,12 @@
 // Date:    16.09.2013 00:38:25 CEST
 // File:    usb_hid.hpp
 
+/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://www.wtfpl.net/ or COPYING for more details. */
+
 #ifndef __USB_HID_HEADER
 #define __USB_HID_HEADER
 

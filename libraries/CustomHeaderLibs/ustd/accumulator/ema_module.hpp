@@ -2,6 +2,12 @@
 // Date:    23.07.2013 05:01:24 EDT
 // File:    ema_module.hpp
 
+/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://www.wtfpl.net/ or COPYING for more details. */
+
 #ifndef __EMA_MODULE_HEADER
 #define __EMA_MODULE_HEADER
 
@@ -18,14 +24,14 @@ namespace ustd {
     namespace detail {
         template<int N>
         struct requirement<tag::ema<N> > {
-            typedef list_end type;
+            typedef util::list_end type;
         };
     }//end namespace detail
     
     template<typename T, typename _base, int N>
     class module<T, tag::ema<N>, _base>: public _base {
         typedef _base base;
-        typedef typename mean_trait<T>::type mean_type;
+        typedef typename util::mean_trait<T>::type mean_type;
     public:
         //------------------- ctor -------------------
         module(): base(), sum_() { //just heuristics for now

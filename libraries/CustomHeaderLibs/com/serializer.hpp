@@ -2,6 +2,12 @@
 // Date:    29.05.2013 23:04:33 EDT
 // File:    serializer.hpp
 
+/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://www.wtfpl.net/ or COPYING for more details. */
+
 #ifndef __SERIALIZER_HEADER
 #define __SERIALIZER_HEADER
 
@@ -9,7 +15,7 @@
 //~ #define __LESS_ZERO
 
 #include "archive_enum.hpp"
-#include "../util/meta_template.hpp"
+#include "../ustd/type_traits.hpp"
 #include "../ustd/ard_assert.hpp"
 #include "../util/byte_operation.hpp"
 #include "../util/has_serialize.hpp"
@@ -81,13 +87,13 @@ namespace com {
     template<typename T, typename Archive> //has no serialize_tpl
     struct serialize_helper<T, false, Archive> {
         static void get(Archive & ar, T & t) {
-            impl_version<T, Archive, Archive::type, is_array<T>::value>().get(t, ar);
+            impl_version<T, Archive, Archive::type, ustd::is_array<T>::value>().get(t, ar);
         }
     };
 
     template<typename T, typename Archive>
     void serialize(Archive & ar, T & t) {
-        serialize_helper<T, has_serialize<T>::value, Archive>().get(ar, t);
+        serialize_helper<T, util::has_serialize<T>::value, Archive>().get(ar, t);
     }
     //------------------- endian helper for of class -------------------
     template<typename T>

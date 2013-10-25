@@ -7,6 +7,6 @@ MODEL = ATMega16MHz
 
 PORT ?= /dev/ttyACM*
 
-OPT = s
+OPT = 3
 
 include /home/greschd/programming/Arduino/arduino_crash_course/makefile/Master_Makefile.mk

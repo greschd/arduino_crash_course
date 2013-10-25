@@ -2,6 +2,12 @@
 // Date:    09.08.2013 13:13:05 CEST
 // File:    bluesmirf_hid.hpp
 
+/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://www.wtfpl.net/ or COPYING for more details. */
+
 #ifndef __BLUESMIRF_HID_HEADER
 #define __BLUESMIRF_HID_HEADER
 

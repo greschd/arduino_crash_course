@@ -93,11 +93,11 @@ ADEFS = -DF_CPU=$(F_CPU)
 
 CDEBUG = -g$(DEBUG)
 CWARN = -Wall -Wstrict-prototypes
-CEXTRA = -g -Wall -fno-exceptions -ffunction-sections -fdata-sections -DARDUINO=102
+CEXTRA = -g -O$(OPT) -Wall -fno-exceptions -ffunction-sections -fdata-sections -DARDUINO=102
 #~ -fno-inline-small-functions -fno-split-wide-types -mshort-calls
 
-CFLAGS = $(CDEBUG) $(CDEFS) $(CINCS) -O$(OPT) $(CWARN) $(CSTANDARD) $(CEXTRA)
-CXXFLAGS = $(CDEFS) $(CXXINCS) -O$(OPT) $(CXXSTANDARD) $(CEXTRA)
+CFLAGS = $(CDEBUG) $(CDEFS) $(CINCS) $(CWARN) $(CSTANDARD) $(CEXTRA)
+CXXFLAGS = $(CDEFS) $(CXXINCS) $(CXXSTANDARD) $(CEXTRA)
 ASFLAGS = $(ADEFS)
 LDFLAGS = -O$(OPT) -Wl,--relax -Wl,--gc-sections -mmcu=$(MCU) -lm
 
@@ -109,19 +109,13 @@ ALL_ASFLAGS = -mmcu=$(MCU) -I. -x assembler-with-cpp $(ASFLAGS)
 all: upload
 
 setting:
-	@echo $(MODEL)
-	@echo $(F_CPU)
-	@echo $(UPLOAD_RATE)
-	@echo $(MCU)
+	@echo "MODEL:   $(MODEL)"
+	@echo "F_CPU:   $(F_CPU)"
+	@echo "UL_RATE: $(UPLOAD_RATE)"
+	@echo "MCU:     $(MCU)"
 #---------------------------control serialscreen-----------------------------------------
 run:
-	#~ if [ ""a"`screen -list | grep $(TARGET)`" = "a" ]; then screen -S $(TARGET) $(PORT) $(BAUD); else screen -S arduino -r; fi
-	#~ cu -l $(PORT) -s $(BAUD)
-	#~ cat $(PORT) $(BAUD)
 	termios $(PORT) $(BAUD)
-
-#~ kill:
-	#~ if [ ""a"`screen -list | grep $(TARGET)`" = "a" ]; then echo already killed; else screen -S $(TARGET) -X quit; echo kill; sleep .1; fi
 
 #---------------------------build "low-level" targets-------------------
 .SUFFIXES: .elf .hex

@@ -311,16 +311,8 @@ public:
     // moves the block down one if possible, generates new block if it isn't. 
     // returns true if the new block fits into the field, false if not (i.e. the game is over).
     bool down() {
-        size_type newposition[2];
-        newposition[0] = position_[0] + 1;
-        newposition[1] = position_[1];
-        if(check_blockfits(orientation_, newposition)){
-            position_[0] = newposition[0];
-            set_block();
-            update_field();
-            return true;
-        }
-        else {
+        bool not_at_bottom = move(1, 0);
+        if(!not_at_bottom) {
             fix();
             return new_block();
         }
@@ -329,37 +321,34 @@ public:
     // moves the block down as much as possible, generates new block. 
     // returns true if the new block fits into the field, false if not (i.e. the game is over).
     bool fast_down() {
-        size_type newposition[2];
-        newposition[0] = position_[0] + 1;
-        newposition[1] = position_[1];
-        while(check_blockfits(orientation_, newposition)) {
-            position_[0] = newposition[0];
+        while(move(1,0)) {
         }
         fix();
         return new_block();
     }
     
-    // moves the block left if possible
-    void left() {
+    
+    // moves the block by (i,j)
+    
+    bool move(size_type i, size_type j) {
         size_type newposition[2];
-        newposition[0] = position_[0];
-        newposition[1] = position_[1] - 1;
+        newposition[0] = position_[0] + i;
+        newposition[1] = position_[1] + j;
         if(check_blockfits(orientation_, newposition)){
+            position_[0] = newposition[0];
             position_[1] = newposition[1];
             update_field();
+            return true;
         }
-    
+        return false;
     }
     
-    // moves the block right if possible
+    void left() {
+        move(0, -1);
+    }
+    
     void right() {
-        size_type newposition[2];
-        newposition[0] = position_[0];
-        newposition[1] = position_[1] + 1;
-        if(check_blockfits(orientation_, newposition)){
-            position_[1] = newposition[1];
-            update_field();
-        }
+        move(0, 1);
     }
     
     // updates 'field' to account for current block position 

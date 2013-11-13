@@ -67,7 +67,7 @@ public:
     }
     
     // returns the value at (i,j)
-    val_type get(size_type i, size_type j) const {
+    val_type const & get(size_type i, size_type j) const {
         return field_[i][j];
     }
     
@@ -134,7 +134,7 @@ public:
     }
     
     // checking the lines count
-    size_type const & get_lines_count () { ///REM: get_lines_count const () doesn't work
+    size_type const & get_lines_count () const{ 
         return lines_count_;
     }
     
@@ -167,7 +167,7 @@ public:
     
     // defining the different block types and their orientation
     // i in (0, 3) indicates the 4 squares of each block j in (0,1) their (negative) y / (positive) x coordinate
-    size_type get_coordinates(shape_enum const & sh, orientation_type const & orientation, size_type const & i, size_type const & j) {
+    size_type const & get_coordinates(shape_enum const & sh, orientation_type const & orientation, size_type const & i, size_type const & j) {
         if(sh == square) { 
             size_type b[4][2] = {{0,2},{0,1},{1,1},{1,2}};
             return b[i][j];

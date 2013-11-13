@@ -8,7 +8,6 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://www.wtfpl.net/ or COPYING for more details. */
 
-//Baus
 
 #include <Arduino.h>
 #include <ustd.hpp>
@@ -283,7 +282,7 @@ public:
     }
     
     // checks if the block with shape_ at 'position' with 'orientation' fits into 'field'
-    bool check_blockfits(orientation_type const & orientation, size_type position[2]) { /// REM: why doesn't const & position[2] work?
+    bool check_blockfits(orientation_type const & orientation, size_type position[2]) { 
         for(size_type i = 0; i < 4; ++i) {
             size_type coordinates[2] = {get_coordinates(shape_, orientation_, i, 0) + position[0],get_coordinates(shape_, orientation_, i, 1) + position[1]};
             if(not(in_field(coordinates[0], coordinates[1]))){

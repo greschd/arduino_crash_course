@@ -22,7 +22,7 @@ namespace cst
     size_type const height = 18;
     size_type const width = 10;
     size_type const border_size = 1;
-    enum tetris_enum {square = 0, curve_right , curve_left, nose, line, var_L, reg_L, number_of_shapes, empty , border, clear_moving = 127, moving_flag = 128};
+    enum tetris_enum {square = 0, curve_right , curve_left, nose, line, var_L, reg_L, number_of_shapes, empty, border, clear_moving = 127, moving_flag = 128};
 }
 
 class tetris_class {
@@ -191,7 +191,7 @@ public:
             }
         }
         else if(sh == cst::line) {
-            if(orientation & 1 == 0) {
+            if((orientation & 1) == 0) {
                 size_type b[4][2] = {{0,0},{0,1},{0,2},{0,3}};
                 return b[i][j];
             }
@@ -290,7 +290,7 @@ public:
                 return false;
             }
             val_type value = get(coordinates[0], coordinates[1]);
-            if(value != cst::empty && ((value & cst::moving_flag) == cst::empty))
+            if(value != cst::empty && ((value & cst::moving_flag) == 0))
                 return false;
         }
         return true;

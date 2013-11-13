@@ -24,11 +24,15 @@ public:
     typedef int8_t size_type;
     typedef int8_t val_type;
     
-    static size_type const height = 18;
-    static size_type const width = 10;
-    static size_type const border = 1;
+    class cst 
+    {
+        public:
+            static size_type const height = 18;
+            static size_type const width = 10;
+            static size_type const border = 1;
+            enum val_enum {empty_val = 0, border_val = 1, first_shape = 2, square_val = 2, curve_right_val , curve_left_val, nose_val, line_val, var_L_val, reg_L_val, nr_of_vals, clear_moving = 127, moving_flag = 128};
+    };
     
-    enum val_enum {empty_val = 0, border_val = 1, first_shape = 2, square_val = 2, curve_right_val , curve_left_val, nose_val, line_val, var_L_val, reg_L_val, nr_of_vals, clear_moving = 127, moving_flag = 128};
     
     tetris_class(): lines_count_(0) {
         
@@ -36,21 +40,21 @@ public:
         reset();
         
         ///setting up the boundary
-        for(size_type i = 0; i < (height + 2 * border); ++i) {
-            field_[i][0] = border_val;
-            field_[i][width + border] = border_val;
+        for(size_type i = 0; i < (cst::height + 2 * cst::border); ++i) {
+            field_[i][0] = cst::border_val;
+            field_[i][cst::width + cst::border] = cst::border_val;
         }
-        for(size_type i = border; i < (width + border); ++i) {
-            field_[0][i] = border_val;
-            field_[height + border][i] = border_val;
+        for(size_type i = cst::border; i < (cst::width + cst::border); ++i) {
+            field_[0][i] = cst::border_val;
+            field_[cst::height + cst::border][i] = cst::border_val;
         }
     }
     
     // setting all to 0 except the boundary
     void reset() {
-        for(size_type i = border; i < (height + border); ++i) {
-            for(size_type j = border; j < (width + border); ++j) {
-                field_[i][j] = empty_val;
+        for(size_type i = cst::border; i < (cst::height + cst::border); ++i) {
+            for(size_type j = cst::border; j < (cst::width + cst::border); ++j) {
+                field_[i][j] = cst::empty_val;
             }
         }
         lines_count_ = 0;
@@ -58,7 +62,7 @@ public:
     
     // sets the element at (i,j) to val
     void set(size_type const & i, size_type const & j, val_type const & val) {
-        assert(0 < i && i < (height + 2 * border) && 0 < j && j < (width + 2 * border));
+        assert(0 < i && i < (cst::height + 2 * cst::border) && 0 < j && j < (cst::width + 2 * cst::border));
         field_[i][j] = val;
     }
     
@@ -69,22 +73,22 @@ public:
     
     // deletes full lines
     void clear_lines() {
-        for(size_type i = border; i < height + border; ++i) {
+        for(size_type i = cst::border; i < cst::height + cst::border; ++i) {
             bool all = true;
-            for(size_type j = border; j < width + border; ++j) {
-                if(field_[i][j] == empty_val) {
+            for(size_type j = cst::border; j < cst::width + cst::border; ++j) {
+                if(field_[i][j] == cst::empty_val) {
                     all = false;
                 }
             }
             if(all) {
                 ++lines_count_;
-                for(size_type k = i; k > border ; --k) {
-                    for(size_type m = border; m < width + border; ++m) {
+                for(size_type k = i; k > cst::border ; --k) {
+                    for(size_type m = cst::border; m < cst::width + cst::border; ++m) {
                         field_[k][m] = field_[k - 1][m];
                     }
                 }
-                for(size_type m = border; m < width + border; ++m) {
-                    field_[1][m] = empty_val;
+                for(size_type m = cst::border; m < cst::width + cst::border; ++m) {
+                    field_[1][m] = cst::empty_val;
                 }
             }
         }
@@ -92,15 +96,15 @@ public:
     
     // checks if (i,j) is inside the border of the field
     bool in_field(size_type i, size_type j) {
-        return (border <= i && i < (border + height)) && (border <= j && j < border + width);
+        return (cst::border <= i && i < (cst::border + cst::height)) && (cst::border <= j && j < cst::border + cst::width);
     }
     
     // sets all elements == temp to zero
     void remove_temp() {
-        for(size_type i = border; i < (height + border); ++i) {
-            for(size_type j = border; j < (width + border); ++j) {
-                if((field_[i][j] & moving_flag) == moving_flag)
-                    field_[i][j] = empty_val;
+        for(size_type i = cst::border; i < (cst::height + cst::border); ++i) {
+            for(size_type j = cst::border; j < (cst::width + cst::border); ++j) {
+                if((field_[i][j] & cst::moving_flag) == cst::moving_flag)
+                    field_[i][j] = cst::empty_val;
             }
         }
     }
@@ -108,19 +112,19 @@ public:
     // output of the playing field
     void print() {
         char* color_list[] = {"\033[1;37m", "\033[1;30m", "\033[1;31m", "\033[1;32m", "\033[1;33m", "\033[1;34m", "\033[1;35m", "\033[1;36m", "\033[1;37m", "\033[1;30m"}; // White, Black, Red, Green, Yellow, Blue, Magenta, Cyan, Black
-        for(size_type i = 0; i < height + 2 * border; ++i) {   
-            for(size_type j = 0; j < width + 2 * border; ++j) {
+        for(size_type i = 0; i < cst::height + 2 * cst::border; ++i) {   
+            for(size_type j = 0; j < cst::width + 2 * cst::border; ++j) {
                 // black background - put in if you don't use a black terminal (not recommended - acute danger of eye cancer!)
                 Serial.print("\033[0;40m");  
-                if(get(i, j) == empty_val) {
+                if(get(i, j) == cst::empty_val) {
                     Serial.print(" ");
                 }
-                else if(get(i, j) == border_val) {
+                else if(get(i, j) == cst::border_val) {
                     Serial.print(color_list[1]);
                     Serial.print("O");
                 }
                 else {
-                    Serial.print(color_list[get(i, j) & clear_moving]);
+                    Serial.print(color_list[get(i, j) & cst::clear_moving]);
                     Serial.print("X");
                 }
             }
@@ -149,7 +153,7 @@ public:
     // sets shape_ to a random value
     void random_shape() {
         shape_ = shape_enum(random() % number_of_shapes);
-        shape_val_ = val_type(shape_) + first_shape;
+        shape_val_ = val_type(shape_) + cst::first_shape;
     }
     
     // sets block_ to be an array containing the coordinates of the four squares
@@ -288,7 +292,7 @@ public:
                 return false;
             }
             val_type value = get(coordinates[0], coordinates[1]);
-            if(value != empty_val && ((value & moving_flag) == empty_val))
+            if(value != cst::empty_val && ((value & cst::moving_flag) == cst::empty_val))
                 return false;
         }
         return true;
@@ -349,13 +353,13 @@ public:
     void update_field() {
         remove_temp();
         for(size_type i = 0; i < 4; ++i) {
-            set(block_[i][0] + position_[0], block_[i][1] + position_[1], shape_val_ | moving_flag);
+            set(block_[i][0] + position_[0], block_[i][1] + position_[1], shape_val_ | cst::moving_flag);
         }
     }
     
     void game_over() {
-        for(size_type i = border; i < height + border; ++i) {
-            for(size_type j = border; j < width + border; ++j) {
+        for(size_type i = cst::border; i < cst::height + cst::border; ++i) {
+            for(size_type j = cst::border; j < cst::width + cst::border; ++j) {
                 set(i, j, (i + j) & 1);
             }
         }
@@ -373,7 +377,7 @@ public:
     
 private:
     size_type lines_count_;
-    val_type field_[height + 2 * border][width + 2 * border];
+    val_type field_[cst::height + 2 * cst::border][cst::width + 2 * cst::border];
     shape_enum shape_;
     val_type shape_val_;
     size_type block_[4][2];
